@@ -12,6 +12,6 @@ namespace COSTS_API.Models.Projects
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         // Lista não será mapeada, pois no BD o Project não tem relação com Service, mas sim ao contrário
-        public virtual IEnumerable<Service> MyProperty { get; set; } = new List<Service>();
+        public virtual List<Service> Services { get; set; } = new List<Service>();
     }
 }

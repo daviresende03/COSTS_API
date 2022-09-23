@@ -21,11 +21,11 @@ namespace COSTS_API.Infra.Data
                 .ToTable("projetos");
 
             builder.Entity<Project>().Property(x => x.Id)
-                .HasColumnName("Id")
+                .HasColumnName("id")
                 .HasColumnType("int(6)");
 
             builder.Entity<Project>().Property(c => c.Name)
-                .HasColumnName("Nome")
+                .HasColumnName("nome")
                 .HasColumnType("varchar(25)")
                 .IsRequired();
 
@@ -35,7 +35,7 @@ namespace COSTS_API.Infra.Data
                 .IsRequired();
 
             builder.Entity<Project>().Property(c => c.Cost)
-                .HasColumnName("orcamento")
+                .HasColumnName("custo")
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
 
@@ -50,11 +50,11 @@ namespace COSTS_API.Infra.Data
                 .ToTable("categorias");
 
             builder.Entity<Category>().Property(x => x.Id)
-                .HasColumnName("Id")
+                .HasColumnName("id")
                 .HasColumnType("int(6)");
 
             builder.Entity<Category>().Property(c => c.Name)
-                .HasColumnName("Nome")
+                .HasColumnName("nome")
                 .HasColumnType("varchar(25)")
                 .IsRequired();
 
@@ -64,21 +64,21 @@ namespace COSTS_API.Infra.Data
                 .ToTable("servicos");
 
             builder.Entity<Service>().Property(x => x.Id)
-                .HasColumnName("Id")
+                .HasColumnName("id")
                 .HasColumnType("int(6)");
 
             builder.Entity<Service>().Property(c => c.Name)
-                .HasColumnName("Nome")
+                .HasColumnName("nome")
                 .HasColumnType("varchar(25)")
                 .IsRequired();
             
             builder.Entity<Service>().Property(c => c.Descritpion)
-                .HasColumnName("Nome")
+                .HasColumnName("descricao")
                 .HasColumnType("varchar(25)")
                 .IsRequired();
 
             builder.Entity<Service>().Property(c => c.Cost)
-                .HasColumnName("orcamento")
+                .HasColumnName("custo")
                 .HasColumnType("decimal(10,2)")
                 .IsRequired();
 

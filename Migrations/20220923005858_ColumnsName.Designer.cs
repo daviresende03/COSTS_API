@@ -2,6 +2,7 @@
 using COSTS_API.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COSTS_API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220923005858_ColumnsName")]
+    partial class ColumnsName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +45,7 @@ namespace COSTS_API.Migrations
                         .HasColumnName("id");
 
                     b.Property<decimal>("Budget")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("decimal(10,2)")
                         .HasColumnName("orcamento");
 
@@ -51,8 +54,9 @@ namespace COSTS_API.Migrations
                         .HasColumnName("categoria");
 
                     b.Property<decimal>("Cost")
+                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("decimal(10,2)")
-                        .HasColumnName("custo");
+                        .HasColumnName("orcamento");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -75,7 +79,7 @@ namespace COSTS_API.Migrations
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(10,2)")
-                        .HasColumnName("custo");
+                        .HasColumnName("orcamento");
 
                     b.Property<string>("Descritpion")
                         .IsRequired()
