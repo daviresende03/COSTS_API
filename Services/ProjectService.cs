@@ -2,6 +2,7 @@
 using COSTS_API.Interfaces;
 using COSTS_API.Models.Projects;
 using COSTS_API.Models.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace COSTS_API.Services
 {
@@ -13,9 +14,12 @@ namespace COSTS_API.Services
             _context = context;
         }
 
-        public Task<Project> FindByIdAsync(int id)
+        public async Task<Project> FindByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _context.Projects
+                    .Include(x => x.Services)
+                    .Include(x => x.Category)
+                    .FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<Project> InsertAsync(ProjectRequest projectReq)

@@ -22,11 +22,11 @@ namespace COSTS_API.Infra.Data
 
             builder.Entity<Project>().Property(x => x.Id)
                 .HasColumnName("id")
-                .HasColumnType("int(6)");
+                .HasColumnType("int");
 
             builder.Entity<Project>().Property(c => c.Name)
                 .HasColumnName("nome")
-                .HasColumnType("varchar(25)")
+                .HasColumnType("varchar(50)")
                 .IsRequired();
 
             builder.Entity<Project>().Property(c => c.Budget)
@@ -41,7 +41,7 @@ namespace COSTS_API.Infra.Data
 
             builder.Entity<Project>().Property(c => c.CategoryId)
                 .HasColumnName("categoria")
-                .HasColumnType("int(6)")
+                .HasColumnType("int")
                 .IsRequired();
 
             // Category
@@ -51,11 +51,11 @@ namespace COSTS_API.Infra.Data
 
             builder.Entity<Category>().Property(x => x.Id)
                 .HasColumnName("id")
-                .HasColumnType("int(6)");
+                .HasColumnType("int");
 
             builder.Entity<Category>().Property(c => c.Name)
                 .HasColumnName("nome")
-                .HasColumnType("varchar(25)")
+                .HasColumnType("varchar(40)")
                 .IsRequired();
 
             //Service
@@ -69,12 +69,12 @@ namespace COSTS_API.Infra.Data
 
             builder.Entity<Service>().Property(c => c.Name)
                 .HasColumnName("nome")
-                .HasColumnType("varchar(25)")
+                .HasColumnType("varchar(60)")
                 .IsRequired();
             
             builder.Entity<Service>().Property(c => c.Descritpion)
                 .HasColumnName("descricao")
-                .HasColumnType("varchar(25)")
+                .HasColumnType("varchar(120)")
                 .IsRequired();
 
             builder.Entity<Service>().Property(c => c.Cost)
@@ -84,7 +84,7 @@ namespace COSTS_API.Infra.Data
 
             builder.Entity<Service>().Property(c => c.ProjectId)
                 .HasColumnName("projeto")
-                .HasColumnType("int(6)")
+                .HasColumnType("int")
                 .IsRequired();
         }
     }
