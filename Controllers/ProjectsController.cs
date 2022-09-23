@@ -27,11 +27,13 @@ namespace COSTS_API.Controllers
 
                 var proj = new ProjectResponse
                 {
+                    Id = result.Id,
                     Name = result.Name,
                     Budget = result.Budget,
                     Cost = result.Cost,
                     Category = new CategoryResponse
                     {
+                        Id = result.Category.Id,
                         Name = result.Category.Name
                     }
                 };
@@ -39,6 +41,7 @@ namespace COSTS_API.Controllers
                 {
                     proj.Services.Add(new ServiceResponse
                     {
+                        Id = serv.Id,
                         Name = serv.Name,
                         Description = serv.Descritpion,
                         Cost = serv.Cost

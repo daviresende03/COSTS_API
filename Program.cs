@@ -30,7 +30,9 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Adicionando Serviços ao projeto
 builder.Services.AddScoped<IProject, ProjectService>();
+builder.Services.AddScoped<ICategory, CategoryService>();
 
 var app = builder.Build();
 
