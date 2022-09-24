@@ -47,7 +47,6 @@ namespace COSTS_API.Controllers
         [HttpDelete(Name = "DeleteCategories")]
         public async Task<IResult> Delete([FromBody] Category category)
         {
-            //Verificar se esta sendo usado por algum project
             var obj = await _categoryService.RemoveAsync(category);
             if (!obj)
             {

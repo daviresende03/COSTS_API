@@ -9,5 +9,6 @@ namespace COSTS_API.Interfaces
         Task<Category> FindByNameAsync(string name);
         Task<Category> InsertAsync(CategoryRequest categoryReq);
         Task<bool> RemoveAsync(Category category);
+        Task<bool> ExistProjectWithThisCategory(Category category);
     }
 }

@@ -40,6 +40,9 @@ namespace COSTS_API.Services
         {
             try
             {
+                // Verifica se existe algum projeto no Banco de dados utilizando essa categoria
+                if(await ExistProjectWithThisCategory(category))
+                    return false;
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
                 return true;
@@ -48,6 +51,13 @@ namespace COSTS_API.Services
             {
                 return false;
             }
+        }
+        public async Task<bool> ExistProjectWithThisCategory(Category category)
+        {
+            var project = _context.Projects.FirstOrDefault(x => x.Category == category);
+            if (project == null)
+                return false;
+            return true;
         }
     }
 }
