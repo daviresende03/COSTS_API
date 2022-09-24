@@ -29,11 +29,11 @@ namespace COSTS_API.Controllers
         {
             var result = await _categoryService.FindAllAsync();
             if (result == null)
-                return Results.NotFound("Não existe Categorias cadastradas");
+                return Results.NotFound("Não existe Categorias cadastradas.");
             return Results.Ok(result);
         }
 
-        [HttpPost(Name = "PostCategory")]
+        [HttpPost(Name = "PostCategories")]
         public async Task<IResult> Post([FromBody] CategoryRequest categoryRequest)
         {
             var result = await _categoryService.FindByNameAsync(categoryRequest.Name);
@@ -44,6 +44,16 @@ namespace COSTS_API.Controllers
             return Results.Created($"/categories/{category.Id}", category.Id);
         }
 
-        
+        [HttpDelete(Name = "DeleteCategories")]
+        public async Task<IResult> Delete([FromBody] Category category)
+        {
+            //Verificar se esta sendo usado por algum project
+            var obj = await _categoryService.RemoveAsync(category);
+            if (!obj)
+            {
+                return Results.BadRequest("Houve um erro ao deletar a categoria.");
+            }
+            return Results.Ok();
+        }
     }
 }

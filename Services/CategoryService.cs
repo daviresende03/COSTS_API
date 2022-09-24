@@ -34,8 +34,20 @@ namespace COSTS_API.Services
 
             var obj = await FindByNameAsync(categoryReq.Name);
             return obj;
+        }
 
-            
+        public async Task<bool> RemoveAsync(Category category)
+        {
+            try
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
