@@ -16,7 +16,7 @@ namespace COSTS_API.Controllers
             _projectService = projServ;
         }
         
-        [HttpGet("{id:int}",Name = "GetProject")]
+        [HttpGet("{id:int}",Name = "GetProjects")]
         public async Task<IResult> Get([FromRoute] int id)
         {
             try
@@ -55,13 +55,27 @@ namespace COSTS_API.Controllers
             }
         }
 
-        [HttpPost(Name = "PostProject")]
+        [HttpPost(Name = "PostProjects")]
         public async Task<IResult> Post([FromBody] ProjectRequest projReq)
         {
             try
             {
                 var result = await _projectService.InsertAsync(projReq);
                 return Results.Created($"/projects/{result.Id}", result.Id);
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(new { Mensagem = "Houve um erro ao recuperar o Projeto", Erro = $"{ex.Message}" });
+            }
+        }
+
+        [HttpDelete("{id:int}",Name = "DeleteProjects")]
+        public async Task<IResult> Delete([FromRoute] int id)
+        {
+            try
+            {
+                await _projectService.RemoveAsync(id);
+                return Results.Ok();
             }
             catch (Exception ex)
             {

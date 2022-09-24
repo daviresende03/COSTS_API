@@ -8,6 +8,6 @@ namespace COSTS_API.Models.Projects
         public decimal Budget { get; set; }
         public decimal Cost { get; set; }
         public int CategoryId { get; set; }
-        public IEnumerable<ServiceRequest> Services { get; set; } = new List<ServiceRequest>();
+        public List<ServiceRequest> Services { get; set; } = new List<ServiceRequest>();
     }
 }

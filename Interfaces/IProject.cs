@@ -6,5 +6,6 @@ namespace COSTS_API.Interfaces
     {
         Task<Project> FindByIdAsync(int id);
         Task<Project> InsertAsync(ProjectRequest projectReq);
+        Task<Project> RemoveAsync(int id);
     }
 }

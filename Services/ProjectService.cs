@@ -14,6 +14,17 @@ namespace COSTS_API.Services
             _context = context;
         }
 
+        public async Task<Project> RemoveAsync(int id)
+        {
+            var obj = await FindByIdAsync(id);
+
+            _context.Projects.Remove(obj);
+            obj.Services.ForEach(x => _context.Services.Remove(x));
+            await _context.SaveChangesAsync();
+
+            return obj;
+        }
+
         public async Task<Project> FindByIdAsync(int id)
         {
             return _context.Projects
@@ -39,7 +50,7 @@ namespace COSTS_API.Services
                 obj.Services.Add(new Service
                 {
                     Name = service.Name,
-                    Descritpion = service.Descritpion,
+                    Descritpion = service.Description,
                     Cost = service.Cost,
                     ProjectId = obj.Id
                 });

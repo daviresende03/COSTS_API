@@ -36,12 +36,15 @@ namespace COSTS_API.Services
             return obj;
         }
 
-        public async Task<bool> RemoveAsync(Category category)
+        public async Task<bool> RemoveAsync(int id)
         {
             try
             {
+                var category = await FindByIdAsync(id);
                 // Verifica se existe algum projeto no Banco de dados utilizando essa categoria
-                if(await ExistProjectWithThisCategory(category))
+                if (category == null)
+                    return false;
+                if (await ExistProjectWithThisCategoryAsync(category))
                     return false;
                 _context.Categories.Remove(category);
                 await _context.SaveChangesAsync();
@@ -52,7 +55,7 @@ namespace COSTS_API.Services
                 return false;
             }
         }
-        public async Task<bool> ExistProjectWithThisCategory(Category category)
+        public async Task<bool> ExistProjectWithThisCategoryAsync(Category category)
         {
             var project = _context.Projects.FirstOrDefault(x => x.Category == category);
             if (project == null)

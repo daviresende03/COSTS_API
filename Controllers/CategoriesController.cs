@@ -44,10 +44,10 @@ namespace COSTS_API.Controllers
             return Results.Created($"/categories/{category.Id}", category.Id);
         }
 
-        [HttpDelete(Name = "DeleteCategories")]
-        public async Task<IResult> Delete([FromBody] Category category)
+        [HttpDelete("{id:int}", Name = "DeleteCategories")]
+        public async Task<IResult> Delete([FromRoute] int id)
         {
-            var obj = await _categoryService.RemoveAsync(category);
+            var obj = await _categoryService.RemoveAsync(id);
             if (!obj)
             {
                 return Results.BadRequest("Houve um erro ao deletar a categoria.");
