@@ -11,14 +11,31 @@ namespace COSTS_API.Services
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Category>> FindAllAsync()
+        {
+            return _context.Categories.ToList();
+        }
+
         public async Task<Category> FindByIdAsync(int id)
         {
             return _context.Categories.FirstOrDefault(x => x.Id == id);
         }
 
-        public Task<Category> InsertAsync(CategoryRequest categoryReq)
+        public async Task<Category> FindByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            return _context.Categories.FirstOrDefault(x => x.Name == name);
+        }
+
+        public async Task<Category> InsertAsync(CategoryRequest categoryReq)
+        {
+            await _context.Categories.AddAsync(new Category { Name = categoryReq.Name});
+            await _context.SaveChangesAsync();
+
+            var obj = await FindByNameAsync(categoryReq.Name);
+            return obj;
+
+            
         }
     }
 }

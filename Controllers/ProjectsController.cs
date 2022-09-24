@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace COSTS_API.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
     {
         private readonly IProject _projectService;

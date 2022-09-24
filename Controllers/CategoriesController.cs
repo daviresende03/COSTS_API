@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace COSTS_API.Controllers
 {
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/[controller]")]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategory _categoryService;
@@ -13,6 +13,8 @@ namespace COSTS_API.Controllers
         {
             _categoryService = categServ;
         }
+
+
         [HttpGet("{id:int}", Name = "GetCategories")]
         public async Task<IResult> Get([FromRoute] int id)
         {
@@ -21,5 +23,27 @@ namespace COSTS_API.Controllers
                 return Results.NotFound("Id inexistente no banco de dados.");
             return Results.Ok(new CategoryResponse { Id = result.Id, Name = result.Name });
         }
+
+        [HttpGet(Name = "GetAllCategories")]
+        public async Task<IResult> Get()
+        {
+            var result = await _categoryService.FindAllAsync();
+            if (result == null)
+                return Results.NotFound("Não existe Categorias cadastradas");
+            return Results.Ok(result);
+        }
+
+        [HttpPost(Name = "PostCategory")]
+        public async Task<IResult> Post([FromBody] CategoryRequest categoryRequest)
+        {
+            var result = await _categoryService.FindByNameAsync(categoryRequest.Name);
+            if (result != null)
+                return Results.BadRequest(new {Message = "Categoria já cadastrada.", Category = result});
+
+            var category = await _categoryService.InsertAsync(categoryRequest);
+            return Results.Created($"/categories/{category.Id}", category.Id);
+        }
+
+        
     }
 }
